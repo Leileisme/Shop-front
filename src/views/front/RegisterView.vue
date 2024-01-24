@@ -20,7 +20,7 @@ import validator from 'validator'
 // Vue 的表單的驗證
 import { useForm, useField } from 'vee-validate'
 import * as yup from 'yup'
-// 這裡不用加js，因為 vite引用的時候會自動去找相關的檔案
+// 這裡不用加js，因為 vite 引用的時候會自動去找相關的檔案
 import { useRouter } from 'vue-router'
 import { useSnackbar } from 'vuetify-use-dialog'
 import { useApi } from '@/composables/axios'
