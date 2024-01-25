@@ -102,6 +102,22 @@ const routes = [
         }
       }
     ]
+  },
+  {
+    path: '/404',
+    name: 'NotFound',
+    component: () => import('@/views/NotFoundView.vue'),
+    meta: {
+      title: '購物網 | 找不到',
+      login: false,
+      admin: false
+    }
+  },
+  {
+    // 前端路由 所有未定義路徑地的寫法 '/:pathMatch(.*)*'，後端是'*'
+    path: '/:pathMatch(.*)*',
+    name: 'All',
+    redirect: '/404'
   }
 ]
 
