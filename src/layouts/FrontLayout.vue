@@ -20,10 +20,12 @@ VAppBar(color="primary")
     VBtn(to='/')
       VAppBarTitle 購物網
     VSpacer
+
     //- 手機版導覽列
     //- 判斷是不是手機板 isMobile
     template(v-if="isMobile")
       VAppBarNavIcon(@click="drawer=true")
+
     //- 電腦版導覽列
     template(v-else)
       template(v-for="item in navItems" :key="item.to")
@@ -45,7 +47,7 @@ import { useDisplay } from 'vuetify'
 import { computed, ref } from 'vue'
 import { useUserStore } from '@/store/user'
 import { useApi } from '@/composables/axios'
-// 跳通知的套件?
+// 跳通知的套件，顯示短暫訊息的UI元素
 import { useSnackbar } from 'vuetify-use-dialog'
 import { useRouter } from 'vue-router'
 
