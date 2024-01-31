@@ -17,7 +17,9 @@ VContainer
 
 <script setup>
 import validator from 'validator'
-// Vue 的表單的驗證
+// vee-validate 表單驗證庫
+// useForm 是一個用於創建表單驗證的函數
+// useField 是一個用於創建表單欄位驗證的函數
 import { useForm, useField } from 'vee-validate'
 import * as yup from 'yup'
 // 這裡不用加js，因為 vite 引用的時候會自動去找相關的檔案
@@ -32,6 +34,8 @@ const createSnackbar = useSnackbar()
 
 // 定義註冊表單的資料格式
 const schema = yup.object({
+  // const account = useField('account') 第二個 要跟 account: yup 要一樣
+  //
   account: yup
     .string()
     .required('帳號為必填欄位')
@@ -75,6 +79,8 @@ const account = useField('account')
 const email = useField('email')
 const password = useField('password')
 const passwordConfirm = useField('passwordConfirm')
+
+// EMAIL:email.value.value
 
 const submit = handleSubmit(async (values) => {
   try {
