@@ -105,6 +105,9 @@ const submit = handleSubmit(async (values) => {
     // 註冊完跳頁
     router.push('/login')
   } catch (error) {
+    // ?. 如果任何一個為  null 或 undefined，整個表達式會立即返回 undefined，而不會拋出錯誤。
+    // || 若左邊的值為 false，則回傳右邊的值
+    // 嘗試從錯誤物件中獲取錯誤訊息，如果無法獲取，則使用預設的錯誤訊息
     const text = error?.response?.data?.message || '發生錯誤，請稍後再試'
     // 如果有回復錯誤訊息
     createSnackbar({

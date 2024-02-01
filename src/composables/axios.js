@@ -7,12 +7,14 @@ export const api = axios.create({
   baseURL: import.meta.env.VITE_API
 })
 
+// apiAuth api認證，用來處理需要驗證的請求
 const apiAuth = axios.create({
   baseURL: import.meta.env.VITE_API
 })
 
 // 1. 呼叫 axios.get / axios.post 時
 // 2. interceptors.request 請求攔截器
+// (在請求或響應被 then 或 catch 處理之前對它們進行變更)
 // 3. 送出請求
 // 4. interceptors.response 回應攔截器
 // 5. 呼叫的地方的 .then() .catch()
@@ -53,6 +55,7 @@ apiAuth.interceptors.response.use((res) => {
   return Promise.reject(error)
 })
 
+// composables 要用 use 語法風格
 export const useApi = () => {
   return { api, apiAuth }
 }
