@@ -17,7 +17,9 @@ VContainer
 
 <script setup>
 import validator from 'validator'
-// Vue 的表單的驗證
+// vee-validate 表單驗證庫
+// useForm 是一個用於創建表單驗證的函數
+// useField 是一個用於創建表單欄位驗證的函數
 import { useForm, useField } from 'vee-validate'
 import * as yup from 'yup'
 // 這裡不用加js，因為 vite 引用的時候會自動去找相關的檔案
@@ -32,6 +34,8 @@ const createSnackbar = useSnackbar()
 
 // 定義註冊表單的資料格式
 const schema = yup.object({
+  // const account = useField('account') 第二個 要跟 account: yup 要一樣
+  //
   account: yup
     .string()
     .required('帳號為必填欄位')
@@ -76,6 +80,8 @@ const email = useField('email')
 const password = useField('password')
 const passwordConfirm = useField('passwordConfirm')
 
+// EMAIL:email.value.value
+
 const submit = handleSubmit(async (values) => {
   try {
     // 因為有引入 axios 並有 baseURL 所以路由'/users'即可
@@ -99,6 +105,9 @@ const submit = handleSubmit(async (values) => {
     // 註冊完跳頁
     router.push('/login')
   } catch (error) {
+    // ?. 如果任何一個為  null 或 undefined，整個表達式會立即返回 undefined，而不會拋出錯誤。
+    // || 若左邊的值為 false，則回傳右邊的值
+    // 嘗試從錯誤物件中獲取錯誤訊息，如果無法獲取，則使用預設的錯誤訊息
     const text = error?.response?.data?.message || '發生錯誤，請稍後再試'
     // 如果有回復錯誤訊息
     createSnackbar({
