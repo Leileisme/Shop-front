@@ -7,6 +7,8 @@ export const api = axios.create({
   baseURL: import.meta.env.VITE_API
 })
 
+// 所有帶有 JWT 的相關的請求，用這個呼叫
+// 下面就寫他的攔截器，就不用再每一個 post... 等 再寫一次
 const apiAuth = axios.create({
   baseURL: import.meta.env.VITE_API
 })
@@ -16,6 +18,8 @@ const apiAuth = axios.create({
 // 3. 送出請求
 // 4. interceptors.response 回應攔截器
 // 5. 呼叫的地方的 .then() .catch()
+
+// config 這次請求的設定
 apiAuth.interceptors.request.use(config => {
   const user = useUserStore()
   config.headers.Authorization = 'Bearer ' + user.token
@@ -39,12 +43,15 @@ apiAuth.interceptors.response.use((res) => {
           // 修改發生錯誤的原請求設定的 jwt
           error.config.headers.Authorization = 'Bearer ' + user.token
           // 重新傳送原請求
+          // 會回傳一個包含錯誤資訊的 error 物件。這個 error 物件中的 config 屬性包含了原始請求的配置資訊。
+          // 這種重試機制應該要有一個限制，以避免無限循環。(可研界2/5)
           return axios(error.config)
         })
         .catch(() => {
           // 如果舊換新失敗，登出
           user.logout()
           // 回傳原錯誤到呼叫的地方
+          // 拒絕一個 Promise，並且帶上一個給定的原因 error，會給catch
           return Promise.reject(error)
         })
     }

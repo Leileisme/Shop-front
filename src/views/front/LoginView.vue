@@ -62,11 +62,10 @@ const submit = handleSubmit(async (values) => {
       password: values.password
     })
     user.login(data.result)
-    // 類日 alter 的通知
+    // 類 alter 的通知
     createSnackbar({
       text: '登入成功',
       showCloseButton: false,
-      // 傳到後端???
       snackbarProps: {
         timeout: 2000,
         color: 'green',

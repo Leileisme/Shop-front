@@ -52,7 +52,7 @@ const routes = [
         component: () => import('@/views/front/CartView.vue'),
         meta: {
           title: '購物網 | 購物車',
-          login:true,
+          login: true,
           admin: false
         }
       },

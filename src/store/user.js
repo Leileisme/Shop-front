@@ -14,6 +14,7 @@ export const useUserStore = defineStore('user', () => {
   const role = ref(UserRole.USER)
 
   const login = (data) => {
+    // 如果有 token 就更新
     if (data.token) {
       token.value = data.token
     }
@@ -63,8 +64,11 @@ export const useUserStore = defineStore('user', () => {
     getProfile
   }
 }, {
+  // 儲存的設定
   persist: {
+    // 本地儲存的 key
     key: '20240103',
+    // 應用程式關閉或瀏覽器刷新後，就不會自動登出
     paths: ['token']
   }
 }
