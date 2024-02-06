@@ -45,7 +45,7 @@ apiAuth.interceptors.response.use((res) => {
           error.config.headers.Authorization = 'Bearer ' + user.token
           // 重新傳送原請求
           // 會回傳一個包含錯誤資訊的 error 物件。這個 error 物件中的 config 屬性包含了原始請求的配置資訊。
-          // 這種重試機制應該要有一個限制，以避免無限循環。(可研界2/5)
+          // 這種重試機制應該要有一個限制，以避免無限循環。(可研究2/5)
           return axios(error.config)
         })
         .catch(() => {
